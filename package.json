@@ -17,13 +17,9 @@
     "react": "next",
     "react-dom": "next",
     "react-router-dom": "latest",
-    "server": "react-dom/server",
-    "surrealdb": "^1.0.1",
-    "surrealdb.node": "^1.0.0-beta.1"
+    "server": "react-dom/server"
   },
   "scripts": {
-    "initDb": "surreal start file:'Database/inventory.db' -A --user admin --password admin",
-    "killSurreal": "pkill -9 -f surreal",
     "build:esbuild": "bun scripts/build.esbuild.ts",
     "build:bun": "bun scripts/build.bun.ts",
     "build:server": "bun build scripts/serve.bun.ts --outdir=out --target=bun",
