@@ -3,7 +3,7 @@ import { join as joinPath } from "path";
 import { serve } from "bun";
 import { renderToReadableStream } from "react-dom/server";
 import { watch, statSync } from "fs";
-import { websocketHandler } from "./WebSocket";
+import { websocketHandler } from "../src/WebSocket";
 
 let host: Server | null;
 let debugWS: Server | null;
