@@ -1,0 +1,33 @@
+{
+  "name": "inventory-management",
+  "module": "index.ts",
+  "type": "module",
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/react": "^18.3.10",
+    "@types/react-dom": "^18.3.0"
+  },
+  "peerDependencies": {
+    "typescript": "^5.6.2"
+  },
+  "dependencies": {
+    "bun": "^1.1.29",
+    "esbuild": "^0.24.0",
+    "mime": "^4.0.4",
+    "react": "next",
+    "react-dom": "next",
+    "react-router-dom": "latest",
+    "server": "react-dom/server",
+    "surrealdb": "^1.0.1",
+    "surrealdb.node": "^1.0.0-beta.1"
+  },
+  "scripts": {
+    "initDb": "surreal start file:'Database/inventory.db' -A --user admin --password admin",
+    "killSurreal": "pkill -9 -f surreal",
+    "build:esbuild": "bun scripts/build.esbuild.ts",
+    "build:bun": "bun scripts/build.bun.ts",
+    "build:server": "bun build scripts/serve.bun.ts --outdir=out --target=bun",
+    "dev": "bun scripts/serve.bun.ts",
+    "watch": "bun build:esbuild -w -t esm & bun dev"
+  }
+}
