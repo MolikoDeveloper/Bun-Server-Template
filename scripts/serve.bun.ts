@@ -9,7 +9,7 @@ let host: Server | null;
 let debugWS: Server | null;
 let restartTimer: NodeJS.Timeout | null;
 const productionMode = import.meta.env.NODE_ENV === "production";
-console.log(productionMode ? "Production mode" : "Development mode")
+
 function startServer() {
 
     delete require.cache[require.resolve("src/common/getStatics")];
