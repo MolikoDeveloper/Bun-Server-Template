@@ -1,15 +1,23 @@
 # inventory-management
 
-To install dependencies:
+## To install dependencies:
 
 ```bash
-bun install
+bun create github.com/MolikoDeveloper/Bun-Server-Template DirName
 ```
 
-To run:
+## To create the bundle in watch mode:
 
 ```bash
-bun run index.ts
+bun build:bun -w
 ```
 
-This project was created using `bun init` in bun v1.1.29. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
+```bash
+bun build:esbuild -w
+```
+
+## to run the server:
+
+```bash
+bun dev
+```
