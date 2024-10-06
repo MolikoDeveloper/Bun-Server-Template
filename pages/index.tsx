@@ -10,11 +10,10 @@ export default function () {
             </Helmet>
             <ClientOnly>
                 <Routes>
-                    <Route>
-                        <Route path="/" element={<>Hola! que tal!</>}></Route>
-                    </Route>
+                    <Route path="/" element={<>Hola! que tal! :D</>} />
+                    <Route path="/hola" element={<>Hola! que tal!</>} />
                 </Routes>
-            </ClientOnly>
+            </ClientOnly >
         </>
     )
 }

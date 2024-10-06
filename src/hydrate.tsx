@@ -42,6 +42,15 @@ async function doHydrate(appLocation: string) {
     }
 }
 
+if (!globalThis.debug) {
+
+    (globalThis as any).debug = {
+        log:
+            (level: string, source: string, message: string) => {
+                return;
+            }
+    }
+}
 
 (globalThis as any).doHydrate = doHydrate;
 
