@@ -1,5 +1,7 @@
 import { useEffect } from "react";
 import { Helmet } from "react-helmet";
+import { Route, Routes } from "react-router-dom";
+import ClientOnly from "src/components/ClientOnly";
 
 export default function () {
     useEffect(() => {
@@ -10,10 +12,12 @@ export default function () {
             <Helmet>
                 <title>Ayuda</title>
             </Helmet>
-            <>
-                <h1>Esto es ayuda</h1>
-                <button onClick={() => { console.log("hola!") }}>aaa :D</button>
-            </>
+            <ClientOnly>
+                <Routes>
+                    <Route path="/" element={<>Hola! que tal! :D</>} />
+                    <Route path="/hola" element={<>Hola! que tal!</>} />
+                </Routes>
+            </ClientOnly >
         </>
     )
 }
