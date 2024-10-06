@@ -1,9 +1,7 @@
 import { parseArgs } from 'util';
 import { getFilesArrayFromDir } from 'src/common/getStatics';
 import type { BuildConfig } from 'bun';
-import { watch, statSync } from "fs";
-import { bundlerModuleNameResolver } from 'typescript';
-
+import { rmSync, watch } from "fs";
 
 const { values: args } = parseArgs({
     args: Bun.argv,
@@ -26,50 +24,57 @@ const { values: args } = parseArgs({
 const productionMode = import.meta.env.NODE_ENV === "production";
 
 if (!["esm"].includes(args.target?.toString().toLocaleLowerCase()!)) {
-    console.error("Only esm is available in Bun")
+    console.log("only esm is available in Bun");
     process.exit();
 }
 
-const config: BuildConfig = {
+const Initconfig: BuildConfig = {
     entrypoints: [
         "src/hydrate.tsx",
-        ...getFilesArrayFromDir('src/webview'),
+        ...getFilesArrayFromDir('src/components'),
         ...getFilesArrayFromDir('pages')
     ],
     outdir: 'dist',
     target: 'browser',
     // @ts-ignore
     format: args.target?.toString().toLocaleLowerCase(),
-    sourcemap: productionMode ? undefined : "inline",
-    minify: productionMode,
-    splitting: args.target === 'esm',
+    sourcemap: productionMode ? undefined : "linked",
+    minify: true,
+    splitting: true,
     naming: {
         entry: '[dir]/[name].[ext]',
-        chunk: 'chunks/[dir]/[name]-[hash].[ext]',
-        asset: '[dir]/[name]-[hash].[ext]'
+        asset: '[dir]/[name]-[hash].[ext]',
+        chunk: '[dir]/chunk/[name]-[hash].[ext]',
     }
 }
 
 if (args.watch) {
     try {
-        [
-            "src", "pages"
-        ].forEach(dir => {
+        ["src", "pages"].forEach(dir => {
+            console.log(`watching ${dir}`);
+
+            Bun.build(Initconfig);
+
             watch(dir, { recursive: true }, (event, file) => {
-                if (file === "App.tsx") return;
-                Bun.build(config).then(result => {
-                    console.log(result.success)
-                })
+                if (file!.endsWith('.css')) return;
+                rmSync("dist/src/chunk", { recursive: true, force: true })
+                if (file !== "App.tsx") {
+                    Bun.build(Initconfig).then(result => {
+                        console.log(`${event} ${dir}/${file} ${result.success ? "🟢" : "🔴"}`)
+                        if (!result.success)
+                            console.log(result.logs);
+                    })
+                }
             })
         })
     }
     catch (e) {
-        console.log(e);
+        console.error(e)
     }
 }
 else {
     try {
-        Bun.build(config);
+        Bun.build(Initconfig);
     }
     catch (e) {
 

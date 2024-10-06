@@ -5,7 +5,8 @@
   "devDependencies": {
     "@types/bun": "latest",
     "@types/react": "^18.3.10",
-    "@types/react-dom": "^18.3.0"
+    "@types/react-dom": "^18.3.0",
+    "@types/react-helmet": "^6.1.11"
   },
   "peerDependencies": {
     "typescript": "^5.6.2"
@@ -16,14 +17,15 @@
     "mime": "^4.0.4",
     "react": "next",
     "react-dom": "next",
+    "react-helmet": "^6.1.0",
     "react-router-dom": "latest",
     "server": "react-dom/server"
   },
   "scripts": {
-    "build:esbuild": "bun scripts/build.esbuild.ts",
+    "build:esbuild": "bun scripts/build.esbuild.ts -t esm",
     "build:bun": "bun scripts/build.bun.ts",
+    "build:bun:watch": "bun scripts/build.bun.ts -w",
     "build:server": "bun build scripts/serve.bun.ts --outdir=out --target=bun",
-    "dev": "bun scripts/serve.bun.ts",
-    "watch": "bun build:esbuild -w -t esm & bun dev"
+    "dev": "bun scripts/serve.bun.ts -l"
   }
 }

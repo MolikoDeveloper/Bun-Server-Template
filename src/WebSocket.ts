@@ -1,5 +1,5 @@
 
-import type { Server, WebSocketHandler } from "bun";
+import type { WebSocketHandler } from "bun";
 
 export const websocketHandler: WebSocketHandler<{ url: URL }> = {
     open(ws) {
@@ -9,7 +9,7 @@ export const websocketHandler: WebSocketHandler<{ url: URL }> = {
     },
     message(ws, message) {
         console.log(`Message from client: ${message}`);
-        ws.publish("debug", message);
+        ws.publish("debug", `${message}`);
     },
     close(ws) {
         console.log(`WebSocket closed: ${ws.data.url}`);

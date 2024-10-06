@@ -62,7 +62,6 @@ export async function handleApiRequest(req: Request, server: Server): Promise<Re
         }
     }
 
-    // Return 404 if no route matches
     return new Response(JSON.stringify({ error: 'Not Found' }), {
         status: 404,
         headers: { 'Content-Type': 'application/json' },

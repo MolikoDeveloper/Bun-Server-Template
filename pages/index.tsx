@@ -1,11 +1,20 @@
-import Layout from "src/webview/Layout";
+import { Helmet } from "react-helmet";
+import { Route, Routes } from "react-router-dom";
+import ClientOnly from "src/components/ClientOnly";
 
 export default function () {
-    console.log("hola que tal!!")
     return (
-        <Layout title="Title">
-            <h1>inicio!!!!!!</h1>
-            <button onClick={() => alert("Hello")}>press me :D</button>
-        </Layout>
+        <>
+            <Helmet>
+                <title>Inicio</title>
+            </Helmet>
+            <ClientOnly>
+                <Routes>
+                    <Route>
+                        <Route path="/" element={<>Hola! que tal!</>}></Route>
+                    </Route>
+                </Routes>
+            </ClientOnly>
+        </>
     )
 }

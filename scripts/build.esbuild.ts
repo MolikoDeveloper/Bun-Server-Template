@@ -30,7 +30,7 @@ if (!["cjs", "esm"].includes(args.target?.toString().toLocaleLowerCase()!)) {
 const config: BuildOptions = {
     entryPoints: [
         "src/hydrate.tsx",
-        ...getFilesArrayFromDir("src/webview"),
+        ...getFilesArrayFromDir("src/components"),
         ...getFilesArrayFromDir("pages"),
     ],
     bundle: true,
@@ -43,7 +43,7 @@ const config: BuildOptions = {
     logLevel: 'info',
     splitting: args.target === "esm",
     entryNames: "[dir]/[name]",
-    chunkNames: "chunks/[dir]/[name]-[hash]",
+    chunkNames: "[dir]/chunks/[name]-[hash]",
     assetNames: "[dir]/[name]-[hash]",
     allowOverwrite: true,
     drop: productionMode ? ["console", "debugger"] : undefined,
