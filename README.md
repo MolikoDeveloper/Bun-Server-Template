@@ -9,7 +9,7 @@ bun create github.com/MolikoDeveloper/Bun-Server-Template DirName
 ## To create the bundle in watch mode:
 
 ```bash
-bun build:bun -w
+bun build:bun:watch
 ```
 
 ```bash
@@ -21,3 +21,5 @@ bun build:esbuild -w
 ```bash
 bun dev
 ```
+
+
