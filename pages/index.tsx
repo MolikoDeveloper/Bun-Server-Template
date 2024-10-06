@@ -27,6 +27,9 @@ export default function () {
                     Web Style from <a target="__blank" href="https://vite.dev">vite</a>!
                 </p>
             </div>
+            <p className="read-the-docs">
+                Click on the Bun and React logos to learn more
+            </p>
         </>
     )
 }
